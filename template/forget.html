@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+	
+  {% block body %}
+
+ <section class="header_text sub">
+			<img class="pageBanner" src="themes/images/pageBanner.png" alt="New products" >
+				<h4><span>Forget Password</span></h4>
+			</section>			
+			<section class="main-content">				
+				<div class="row">
+					<div class="span5">					
+						<h4 class="title"><span class="text"><strong>Reset</strong> Password</span></h4>
+						<form action="#" method="POST">
+							<input type="hidden" name="next" value="/">
+							<fieldset>
+								<div class="control-group">
+									<label class="control-label">Email id</label>
+									<div class="controls">
+										<input type="text" placeholder="Enter your Email" id="username" class="input-xlarge">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">New Password</label>
+									<div class="controls">
+										<input type="password" placeholder="Enter your New password" id="password" class="input-xlarge">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Confirm New Password</label>
+									<div class="controls">
+										<input type="password" placeholder="Enter your Confirm New password" id="password" class="input-xlarge">
+									</div>
+								
+								<div class="control-group">
+									<input tabindex="3" class="btn btn-inverse large" type="submit" value="Continue">
+									<hr>
+									</div>
+							</fieldset>
+						</form>				
+					</div>
+					</form>					
+					</div>				
+				</div>
+			</section>
+		
+{% endblock %}

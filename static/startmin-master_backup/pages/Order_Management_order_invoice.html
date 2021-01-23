@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Agrostar -  Admin</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../css/metisMenu.min.css" rel="stylesheet">
+
+        <!-- Timeline CSS -->
+        <link href="../css/timeline.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../css/startmin.css" rel="stylesheet">
+
+        <!-- Morris Charts CSS -->
+        <link href="../css/morris.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+        <!--for profile image of user-->
+       
+        
+        <style type="text/css">
+        .upload-i_v_wrapper
+        {
+            padding-top: 5px;
+
+        }
+        .upload-i_v_wrapper .upload_btn
+        {
+           
+            
+            padding: 50px 100px;
+            background: white;
+            border:2px solid #d3d3d3;
+            border-radius: 1px;
+
+        }
+      
+
+        .upload-i_v_wrapper .file-upload-image
+        {
+            display: none;
+            width: 80%;
+            height: 80%;
+            border:1px solid #d3d3d3;
+            border-radius: 1px;
+
+        }
+
+        .upload-i_v_wrapper .remove-image
+        {
+            display: none;
+            width: 100%;
+          
+            
+        }
+        .upload-i_v_wrapper  > li
+        {
+            padding: 0px 5px 0px 5px;
+        }
+
+        .upload-i_v_wrapper  > li:nth-child(2) > span 
+        {
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px)
+        {
+            .upload-i_v_wrapper .upload_btn
+            {
+              
+                background: white;
+                
+            }
+
+        }
+        .table-responsive::-webkit-scrollbar-thumb
+        {
+            background:rgba(234,234,255,0.5);
+        }
+        </style>
+    </head>
+    <body>
+
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="position: fixed;">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html"><img src="../img/logo-white-200x53.png" class="img-responsive" style="width: 100px;"></a>
+                </div>
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!--<ul class="nav navbar-nav navbar-left navbar-top-links">
+                    <li><a href="#"><i class="fa fa-home fa-fw"></i> Website</a></li>
+                </ul>-->
+
+                <ul class="nav navbar-right navbar-top-links">
+                    <li class="dropdown navbar-inverse">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-comment fa-fw"></i> New Comment
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                        <span class="pull-right text-muted small">12 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-tasks fa-fw"></i> New Task
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>See All Alerts</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> secondtruth <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <!--<li class="sidebar-search">
+                                <div class="input-group custom-search-form">
+                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                </span>
+                                </div>
+                              
+                            </li>-->
+                            <li>
+                                <a href="index.html" ><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="glyphicon glyphicon-user text-primary"></i>&nbsp; User Management<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="flot.html" >View / Delete Users</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html" >Add User</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                          
+
+                             <li>
+                                <a href="#"><i class="fa fa-shopping-bag text-primary"></i>&nbsp; Product Management<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="flot.html" >View / Update / Delete Product</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Add Product</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+
+                            <li>
+                                 <a href="#"><i class="fa fa-shopping-bag text-primary"></i>&nbsp; Order Management<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="flot.html" >View / Update Order</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html" class="active">Order Invoice</a>
+                                    </li>
+                                </ul>
+                            </li>
+                             <li>
+                                <a href="forms.html"><i class="fa fa-edit text-primary">&nbsp;</i> Review Management</a>
+                            </li>
+
+                             <li>
+                                <a href="#"><i class="fa fa-envira text-primary"></i>&nbsp; Crop Management<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="flot.html">View / Update / Delete Crops</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Add Crop</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+
+                              <li>
+                                <a href="#"><i class="fa fa-youtube-play text-primary"></i>&nbsp; E-learn(tutorial) Management<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="flot.html">View / Delete Videos</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Add Video</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                              <li>
+                                <a href="forms.html"><i class="fa fa-paper-plane-o text-primary">&nbsp;</i> Feedback Management</a>
+                            </li>
+
+                             <li>
+                                <a href="forms.html"><i class="fa fa-reply text-primary">&nbsp;</i> Contact Us Management</a>
+                            </li>
+
+                          
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                       <div class="col-lg-12">
+                           <ol class="breadcrumb " style="margin-top: 30px;font-size: 15px;background-color: none;">
+                            <li><a href="#">Dashboard</a></li>
+                            <li class="active">Order Management</li>
+                             <li class="active">Order Invoice</li>
+                          
+                        </ol>
+                        <hr>
+                       </div>
+                    </div>
+                    <!-- /.row -->
+
+                   
+
+               <div class="row">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-md-6 col-xl-6">
+                <h2>Invoice #33221</h2>
+                <p>12 Jan 2019,12:00AM</p>
+                </div>
+                <div class="col-md-6 col-xl-6">
+                    <br>
+                    <img src="C:/Users/Dhruv/Downloads/New Download from Date -10-8-18/Agrostar.png" class="img-responsive pull-right" style="height: 40px;width: 160px;">
+
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+               
+               
+                
+                <div class="col-xs-12 col-md-6 col-lg-6">
+                    <div class="panel panel-default height">
+                        <div class="panel-heading">Shipping Address</div>
+                        <div class="panel-body">
+                            <strong>Kishanbhai</strong><br>
+                            1111 Army Navy Drive<br>
+                            Arlington<br>
+                            VA<br>
+
+                            <strong>Ahmedabad</strong><br>
+                            <strong>Gujarat</strong>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="col-xs-12 col-md-6 col-lg-6 pull-right">
+                    <div class="panel panel-default height">
+                        <div class="panel-heading">Payment Information</div>
+                        <div class="panel-body">
+                            <strong>Payment Method :</strong>Debit Card<br> 
+                            <strong>Card Name:</strong> Visa<br>
+                            <strong>Card Number:</strong> ***** 332<br>
+                            <strong>Exp Date:</strong> 09/2020<br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class=""><strong>Order summary</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <td><strong>Product Name</strong></td>
+                                    <td class="text-center"><strong>Product Price</strong></td>
+                                    <td class="text-center"><strong>Product Quantity</strong></td>
+                                    <td class="text-right"><strong>Total</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Samsung Galaxy S5</td>
+                                    <td class="text-center">₹900</td>
+                                    <td class="text-center">1</td>
+                                    <td class="text-right">₹900</td>
+                                </tr>
+                                <tr>
+                                    <td>Samsung Galaxy S5 Extra Battery</td>
+                                    <td class="text-center">₹30.00</td>
+                                    <td class="text-center">1</td>
+                                    <td class="text-right">₹30.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Screen protector</td>
+                                    <td class="text-center">₹7</td>
+                                    <td class="text-center">4</td>
+                                    <td class="text-right">₹28</td>
+                                </tr>
+                               
+                                <tr>
+                                    <td class="emptyrow"></td>
+                                    <td class="emptyrow"></td>
+                                    <td class="emptyrow text-center"><strong>Grand Total</strong></td>
+                                    <td class="emptyrow text-right">₹978.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+
+        <!-- jQuery -->
+        <script src="../js/jquery.min.js"></script>
+
+
+
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../js/bootstrap.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../js/metisMenu.min.js"></script>
+
+        <!--Morris Charts JavaScript -->
+        <!--<script src="../js/raphael.min.js"></script>
+        <script src="../js/morris.min.js"></script>
+        <script src="../js/morris-data.js"></script>-->
+
+         <!-- DataTables JavaScript -->
+        <script src="../js/dataTables/jquery.dataTables.min.js"></script>
+        <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
+
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../js/startmin.js"></script>
+        
+
+        <script>
+
+
+$(document).ready(function(){
+
+    $('.upload_btn').click(function(){
+        $('.file-upload-input').click();
+    });
+
+   
+});
+
+ function readURL(input)
+    {
+               if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+          reader.onload = function(e) {
+            $('.upload_btn').hide();
+             $('.image-title-no').hide();
+            $('.file-upload-image').attr('src', e.target.result);
+            $('.file-upload-image').show();
+            $('.remove-image').show();
+           
+            $('.image-title').html(input.files[0].name);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+
+        } else {
+          removeUpload();
+        }
+    }
+
+    function removeUpload()
+    {
+         $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+
+        $('.file-upload-image').hide();
+        $('.remove-image').hide();
+        $('.upload_btn').show();
+         $('.image-title-no').show();
+    } 
+    </script>
+        
+
+
+    </body>
+</html>
