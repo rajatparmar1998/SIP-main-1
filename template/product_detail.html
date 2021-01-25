@@ -2,7 +2,7 @@
 {% block body %}
 
 			<section class="header_text sub">
-			<img class="pageBanner" src="themes/images/pageBanner.png" alt="New products" >
+			<img class="pageBanner" src="media/images/pageBanner.png" alt="New products" >
 				<h4><span>Product Detail</span></h4>
 			</section>
 			<section class="main-content">				
@@ -30,22 +30,15 @@
 							<div class="span5">
 								<address>
 									<strong>Product name:</strong> <span>{{ Data.pname }}</span><br>
-									<strong>Category:</strong> <span>{{ Data.cname }}</span><br>
+
 									
 									<strong>Availability:</strong> <span>{{ Data.stock }}</span><br>								
 								</address>									
 								<h4><strong>Price: </strong><span>{{ Data.price }}/-</span></h4>
 							</div>
 							<div class="span5">
-								<form class="form-inline">
-									<label class="checkbox">
-										<input type="checkbox" value=""> Option one is this and that
-									</label>
-									<br/>
-									<label class="checkbox">
-									  <input type="checkbox" value=""> Be sure to include why it's great
-									</label>
-									<p>&nbsp;</p>
+								<form class="form-inline" method="POST" action="{% url 'add-to-cart' Data.pid %}">
+														{% csrf_token %}
 									<label>Qty:</label>
 									<input type="text" class="span1" placeholder="1">
 									<button class="btn btn-inverse" type="submit">Add to cart</button>

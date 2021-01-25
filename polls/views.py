@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import *
+from .utils import *
 from django.contrib.auth import authenticate ,login,logout
 from django.contrib import messages
-
+from django.db.models import Count
 
 
 # Create your views here.
@@ -16,60 +17,6 @@ def register(request):
 		
 	return render(request,'register.html')
 
-def products(request):
-	if request.method != 'POST':
-		prod_obj=product.objects.all()
-		datalist = []
-		for x in prod_obj:
-			datalist.append(
-				{
-				'pname':x.product_name, 'image': x.image.url, 'price':x.price,'pid':x.product_id
-				})
-		print("List:::",datalist)
-
-
-		
-        
-	return render(request,'products.html', {'Data': datalist})
-    
-    
-   #waitok
-
-#def forget(request):
-
-# @action(methods=['post'], detail=True)
-    # def ForgetPassword(self, request, pk=None):
-        # """
-        # Reset password
-        # Required reset_password_token only if not logged in ( For reset password )
-
-        # """
-        # dbname = request.data.get('Dbname')
-        # emailaddress = request.data.get('EmailID')
-        # user_obj = UserProfile.objects.using(dbname).filter(EmailID__exact=user_email).first()
-        # if user_obj:
-            # password = request.data.get('Password')
-            # password = encryppass(password)
-            # user_obj.Password = password
-            # user_obj.save(using=dbname)
-            # message = "Password changed successfully."
-            # status_code = status.HTTP_200_OK
-            # content = {"result": "Success", "message": message, 'status_code': status_code}
-
-            # return Response(content)
-        # else:
-            # content = {"result": "Fail", "message": "Operation fail", 'status_code ': 'status.HTTP_400_BAD_REQUEST'}
-            # return Response(content)
-    # return render(request,'forget.html')
-
-def profile(request):
-        return render(request,'profile.html')
-
-def home(request):
-	return render(request,'index.html')
-
-def admin_index(request):
-	return render(request,'ad_index.html')
 
 def products_detail(request, pid):
 	prod_obj= product.objects.get(product_id=pid)
@@ -77,18 +24,47 @@ def products_detail(request, pid):
 	datalist=[]
 	datalist.append(
 			{
-			'stock':prod_obj.stock,'pname':prod_obj.product_name,'cname':prod_obj.cat_name,
+			'stock':prod_obj.stock,'pname':prod_obj.product_name,'pid':prod_obj.product_id,
 			'image':prod_obj.image.url,'description':prod_obj.description,'price':prod_obj.price
 			})
 	print("Whole data :",datalist[0])
 	return render(request,'product_detail.html',{'Data':datalist[0]})
+
+
+def products(request, cid):
+	context = {}
+	context['active_product_category_name'] = category.objects.get(cat_id=cid)
+	context['product_categories'] = product.objects.order_by('cat_id__cat_name').values('cat_id',
+																						'cat_id__cat_name').annotate(
+		count=Count('cat_id')
+		)
+
+	context['brands'] = product.objects.order_by('brand_id__brand_name').values('brand_id',
+																				'brand_id__brand_name').annotate(
+		count=Count('brand_id'))
+	context['products'] = product.objects.filter(cat_id=cid).all()
+
+	return render(request, 'products.html', context)
+
+    
+
+@is_sign_in
+def profile(request):
+
+    return render(request,'profile.html')
+
+def home(request):
+	return render(request,'index.html')
+
+def admin_index(request):
+	return render(request,'ad_index.html')
 
 def contact_us(request):
 	return render(request,'contact.html')
 
 def cart(request):
 	return render(request,'cart.html')
-
+@not_sign_in
 def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -104,3 +80,26 @@ def signin(request):
     else:
         return render(request, 'register.html') 
 
+@is_sign_in
+def add_cart(request,pid):
+	if request.method=='POST':
+		pr_obj=product.objects.get(product_id=pid)
+#print("data:::::::::::::::::::::::::::::::::::::",pr_obj.product_name)
+		cat_obj = addcart.objects.create(
+			product_name = pr_obj.product_name,
+			image= pr_obj.image,
+
+			price = pr_obj.price
+
+		)
+		cat_obj.save()
+		cat_ob=[]
+		cartob= addcart.objects.all()
+		for x in cartob:
+			cat_ob.append(
+				{
+					'image':x.image,'product_name':x.product_name,'price':x.price
+				}
+			)
+	# print("ID::::::::::::::::::::::::::::::::::::::::",pid)
+	return render(request,'cart.html',{'cat_obj':cat_ob})

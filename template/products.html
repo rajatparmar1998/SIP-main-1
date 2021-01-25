@@ -6,23 +6,23 @@
 				<h4><span>New products</span></h4>
 			</section>
 			<section class="main-content">
-				
-				<div class="row">						
-					<div class="span9">								
+
+				<div class="row">
+					<div class="span9">
 						<ul class="thumbnails listing-products">
-							{% for x in Data %}
+							{% for product in products %}
 							<li class="span3">
 								<div class="product-box">
-									<span class="sale_tag"></span>												
-									<a href="{% url 'products_detail' x.pid %}"><img alt="" src="{{ x.image }}"></a><br/>
-									<a href="{% url 'products_detail' x.pid %}" class="title"></a><br/>
-									<a href="{% url 'products_detail' x.pid %}" class="category">{{ x.pname }}</a>
-									<p class="price">{{ x.price }}/-</p>
+									<span class="sale_tag"></span>
+									<a href="{% url 'products_detail' product.product_id %}"><img alt="" src="{{ product.image.url }}"></a><br/>
+									<a href="{% url 'products_detail' product.product_id %}" class="title"></a><br/>
+									<a href="{% url 'products_detail' product.product_id %}" class="category">{{ product.pname }}</a>
+									<p class="price">{{ product.price }}/-</p>
 								</div>
-							</li>  
-							{% endfor %}     
-							
-						</ul>								
+							</li>
+							{% endfor %}
+
+						</ul>
 						<hr>
 						<div class="pagination pagination-small pagination-centered">
 							<ul>
@@ -36,24 +36,27 @@
 						</div>
 					</div>
 					<div class="span3 col">
-						<div class="block">	
+						<div class="block">
 							<ul class="nav nav-list">
 								<li class="nav-header">SUB CATEGORIES</li>
-								<li><a href="products.html">Nullam semper elementum</a></li>
-								<li class="active"><a href="products.html">Phasellus ultricies</a></li>
-								<li><a href="products.html">Donec laoreet dui</a></li>
-								<li><a href="products.html">Nullam semper elementum</a></li>
-								<li><a href="products.html">Phasellus ultricies</a></li>
-								<li><a href="products.html">Donec laoreet dui</a></li>
+								{% for product_category in product_categories %}
+								<li class="main-nav-list "><a href="/product/{{ product_category.cat_id }}">{{ product_category.cat_id__cat_name }}<span class="number">({{ product_category.count  }})</span></a></li>
+
+								{% endfor %}
 							</ul>
 							<br/>
-							<ul class="nav nav-list below">
-								<li class="nav-header">MANUFACTURES</li>
-								<li><a href="products.html">Adidas</a></li>
-								<li><a href="products.html">Nike</a></li>
-								<li><a href="products.html">Dunlop</a></li>
-								<li><a href="products.html">Yamaha</a></li>
+
+						</div>
+						<div class="block">
+							<form action="#">
+							<ul class="nav nav-list">
+								<li class="'nav-header"><b> BRANDS</b></li>
+							<br/>
+								{% for brand in brands %}
+								<li class="filter-list"><a href="/product/{{ brand.brand_id }}"><label for="{{ brand.brand_id__brand_name }}">{{ brand.brand_id__brand_name }}<span>({{ brand.count }})</span></label></a></li>
+								{% endfor %}
 							</ul>
+						</form>
 						</div>
 						<div class="block">
 							<h4 class="title">

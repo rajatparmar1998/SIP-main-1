@@ -23,8 +23,8 @@ from polls.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/',register,name='register'),
-    url(r'product$',products,name='products'),
-
+    path('product/<int:cid>',products,name='products'),
+    url(r'cart/(?P<pid>\d)/$',add_cart,name='add-to-cart'),
     url(r'products-detail/(?P<pid>\d+)/$',products_detail,name='products_detail'),
     url(r'contact$',contact_us,name='contact_us'),
     url(r'^$',home,name='home'),
